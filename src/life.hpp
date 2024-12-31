@@ -44,7 +44,7 @@ public:
   void Apply_rules(int row, int col);
   void play();
 
-  void set_count(int row, int col, int count);
+  void set_count(int row, int col, uint8_t count);
   uint8_t get_count(int row, int col);
 
   void Dump(bool dump_count = false);
@@ -53,10 +53,8 @@ public:
 
 private:
   int rows_{}, cols_{};
-  // std::unique_ptr<std::unique_ptr<bool[]>[]> data_{};
-  // std::unique_ptr<std::unique_ptr<uint8_t[]>[]> count_{};
-  bool **data_{};
-  int **count_{};
+  std::unique_ptr<std::unique_ptr<bool[]>[]> data_{};
+  std::unique_ptr<std::unique_ptr<uint8_t[]>[]> count_{};
 };
 
 #endif

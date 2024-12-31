@@ -3,16 +3,12 @@
 
 Grid::Grid(int rows, int cols) : rows_(rows), cols_(cols)
 {
-    // data_ = std::make_unique<std::unique_ptr<bool[]>[]>(rows);
-    // count_ = std::make_unique<std::unique_ptr<uint8_t[]>[]>(rows);
-    data_ = new bool *[rows];
-    count_ = new int *[rows];
+    data_ = std::make_unique<std::unique_ptr<bool[]>[]>(rows);
+    count_ = std::make_unique<std::unique_ptr<uint8_t[]>[]>(rows);
     for (size_t i = 0; i < rows; ++i)
     {
-        // data_[i] = std::make_unique<bool[]>(cols);
-        // count_[i] = std::make_unique<uint8_t[]>(cols);
-        data_[i] = new bool[cols]{};
-        count_[i] = new int[cols]{};
+        data_[i] = std::make_unique<bool[]>(cols);
+        count_[i] = std::make_unique<uint8_t[]>(cols);
     }
 }
 
@@ -26,7 +22,7 @@ bool Grid::at(int row, int col)
     return data_[row][col];
 }
 
-void Grid::set_count(int row, int col, int count)
+void Grid::set_count(int row, int col, uint8_t count)
 {
     count_[row][col] = count;
 }
@@ -76,7 +72,7 @@ void Grid::Dump(bool dump_count)
 
 void Grid::Count(int row, int col)
 {
-    int count{};
+    uint8_t count{};
     for (const auto &ix : {-1, 0, 1})
     {
         for (const auto &iy : {-1, 0, 1})
