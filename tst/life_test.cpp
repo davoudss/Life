@@ -9,13 +9,13 @@ TEST(LifeTest, rule4)
   // grid with 1 bc
   Grid grid(Gx + 2, Gy + 2);
 
-  grid.live(3, 3);
-  grid.live(3, 2);
-  grid.live(3, 1);
+  grid.Live(3, 3);
+  grid.Live(3, 2);
+  grid.Live(3, 1);
   EXPECT_TRUE(grid.is_dead(4, 2));
 
-  grid.play();
-  EXPECT_TRUE(grid.is_alive(4, 2));
+  grid.Play();
+  EXPECT_TRUE(grid.IsAlive(4, 2));
 }
 
 // Any live cell with more than three live neighbours dies, as if by overpopulation.
@@ -26,14 +26,14 @@ TEST(LifeTest, rule3)
   // grid with 1 bc
   Grid grid(Gx + 2, Gy + 2);
 
-  grid.live(3, 3);
-  grid.live(3, 2);
-  grid.live(3, 1);
-  grid.live(4, 3);
-  grid.live(4, 2);
-  EXPECT_TRUE(grid.is_alive(4, 2));
+  grid.Live(3, 3);
+  grid.Live(3, 2);
+  grid.Live(3, 1);
+  grid.Live(4, 3);
+  grid.Live(4, 2);
+  EXPECT_TRUE(grid.IsAlive(4, 2));
 
-  grid.play();
+  grid.Play();
   EXPECT_TRUE(grid.is_dead(4, 2));
 }
 
@@ -45,13 +45,13 @@ TEST(LifeTest, rule2)
   // grid with 1 bc
   Grid grid(Gx + 2, Gy + 2);
 
-  grid.live(3, 3);
-  grid.live(3, 2);
-  grid.live(4, 3);
-  EXPECT_TRUE(grid.is_alive(3, 3));
+  grid.Live(3, 3);
+  grid.Live(3, 2);
+  grid.Live(4, 3);
+  EXPECT_TRUE(grid.IsAlive(3, 3));
 
-  grid.play();
-  EXPECT_TRUE(grid.is_alive(3, 3));
+  grid.Play();
+  EXPECT_TRUE(grid.IsAlive(3, 3));
 }
 
 // Any live cell with fewer than two live neighbours dies, as if by underpopulation.
@@ -62,10 +62,10 @@ TEST(LifeTest, rule1)
   // grid with 1 bc
   Grid grid(Gx + 2, Gy + 2);
 
-  grid.live(3, 3);
-  EXPECT_TRUE(grid.is_alive(3, 3));
+  grid.Live(3, 3);
+  EXPECT_TRUE(grid.IsAlive(3, 3));
 
-  grid.play();
+  grid.Play();
   EXPECT_TRUE(grid.is_dead(3, 3));
 }
 

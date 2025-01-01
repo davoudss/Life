@@ -12,7 +12,7 @@ Grid::Grid(int rows, int cols) : rows_(rows), cols_(cols)
     }
 }
 
-bool Grid::at(int row, int col)
+bool Grid::At(int row, int col)
 {
     // if out of bound, assume dead
     if (row < 0 || row >= rows_ || col < 0 || col >= cols_)
@@ -52,7 +52,7 @@ void Grid::Dump(bool dump_count)
         {
             if (!dump_count)
             {
-                if (is_alive(ix, iy))
+                if (IsAlive(ix, iy))
                 {
                     std::cout << "x ";
                 }
@@ -81,7 +81,7 @@ void Grid::Count(int row, int col)
             {
                 continue;
             }
-            if (at(row + ix, col + iy))
+            if (At(row + ix, col + iy))
             {
                 count++;
             }
@@ -93,25 +93,25 @@ void Grid::Count(int row, int col)
     }
 }
 
-void Grid::Apply_rules(int row, int col)
+void Grid::ApplyRules(int row, int col)
 {
     auto count = get_count(row, col);
-    if (is_alive(row, col))
+    if (IsAlive(row, col))
     {
         // under population
         if (count < 2)
         {
-            die(row, col);
+            Die(row, col);
         }
         // pass on to the next gen.
         else if (count == 2 || count == 3)
         {
-            live(row, col);
+            Live(row, col);
         }
         // over population
         else
         {
-            die(row, col);
+            Die(row, col);
         }
     }
     else
@@ -119,12 +119,12 @@ void Grid::Apply_rules(int row, int col)
         // reproduction
         if (count == 3)
         {
-            live(row, col);
+            Live(row, col);
         }
     }
 }
 
-void Grid::play()
+void Grid::Play()
 {
     for (int ix = 1; ix < rows() - 1; ix++)
     {
@@ -139,7 +139,7 @@ void Grid::play()
         for (int iy = 1; iy < cols() - 1; iy++)
         {
             // std::cout << ix << " " << iy << std::endl;
-            Apply_rules(ix, iy);
+            ApplyRules(ix, iy);
         }
     }
 }
